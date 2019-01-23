@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button (click)="cerrarModal()">
+        Cerrar
+      </button>
+    </ion-buttons>
+
+    <ion-title>Crear Post</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating>Título</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <img src="https://www.arteparaguay.com/wp-content/uploads/2017/03/paisajechaqueno.jpg">
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block icon-left>
+          <ion-icon name="photos"></ion-icon>
+          Seleccionar
+        </button>
+      </ion-col>
+      <ion-col>
+          <button ion-button block icon-left>
+              <ion-icon name="camera"></ion-icon>
+              Cámara
+            </button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
