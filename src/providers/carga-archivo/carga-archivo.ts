@@ -2,15 +2,51 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import { ToastController } from 'ionic-angular';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CargaArchivoProvider {
 
   images: Archivo[] = [];
+  lastKey: string = null;
+
   constructor(
     private toastCtrl: ToastController,
     public afDB: AngularFireDatabase
   ) {
+    this.cargarLastKey().subscribe(() => {
+      this.cargarImagenes();
+    });
+  }
+  
+  private cargarLastKey(){
+    return this.afDB.list('/post',ref => ref.orderByKey().limitToLast(1)).valueChanges().map((res: any) => {
+      this.lastKey = res[0].key;
+
+      this.images.push(res[0]);
+    });
+  }
+
+  // Baja las 3 últimas
+  cargarImagenes(){
+    return new Promise((resolve, reject) => {
+      this.afDB.list('/post', ref => ref.limitToLast(3).orderByKey().endAt(this.lastKey)).valueChanges().subscribe((posts: any) => {
+        posts.pop(); // Seborra la ultima
+        if(posts.length === 0) {
+          // No hay más registros
+          resolve(false);
+          return;
+        }
+
+        this.lastKey = posts[0].key; // Vienen en orden descendiente
+
+        for (let i = posts.length -1; i>= 0 ; i --){
+          let post = posts[i];
+          this.images.push(post);
+        }
+        resolve(true);
+      });
+    });
   }
 
   cargarImagenToFirebase(archivo: Archivo){
