@@ -11,7 +11,7 @@ import { CargaArchivoProvider } from '../../providers/carga-archivo/carga-archiv
 export class SubirPage {
 
   titulo: string = '';
-  imagenB64: string;
+  imagenB64: string = '';
   imagenB64ToFirebase: string;
   constructor(
     private viewCtrl: ViewController,
@@ -66,6 +66,8 @@ export class SubirPage {
       img: this.imagenB64ToFirebase,
       titulo: this.titulo
     };
-    this.cap.cargarImagenToFirebase(archivo);
+    this.cap.cargarImagenToFirebase(archivo).then(() => {
+      this.cerrarModal();
+    });
   }
 }

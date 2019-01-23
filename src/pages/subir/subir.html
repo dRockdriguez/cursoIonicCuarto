@@ -10,7 +10,8 @@
     <ion-title>{{ titulo | placeHolder: 'Crear Post' }}</ion-title>
 
     <ion-buttons end>
-        <button ion-button (click)="crearPost()">
+        <button ion-button (click)="crearPost()"
+          [disabled]="titulo.length <= 1 || imagenB64.length <= 1">
           Crear Post
         </button>
       </ion-buttons>
