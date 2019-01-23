@@ -7,7 +7,13 @@
       </button>
     </ion-buttons>
 
-    <ion-title>Crear Post</ion-title>
+    <ion-title>{{ titulo | placeHolder: 'Crear Post' }}</ion-title>
+
+    <ion-buttons end>
+        <button ion-button (click)="crearPost()">
+          Crear Post
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -16,26 +22,26 @@
 <ion-content padding>
   <ion-item>
     <ion-label floating>Título</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" [(ngModel)]="titulo"></ion-input>
   </ion-item>
-  <ion-item>
-    <img src="https://www.arteparaguay.com/wp-content/uploads/2017/03/paisajechaqueno.jpg">
+  <ion-item *ngIf="imagenB64">
+    <img [src]="imagenB64">
   </ion-item>
 
   <ion-grid>
     <ion-row>
       <ion-col>
-        <button ion-button block icon-left>
+        <button ion-button block icon-left (click)="abrirImagePicker()">
           <ion-icon name="photos"></ion-icon>
           Seleccionar
         </button>
       </ion-col>
       <ion-col>
-          <button ion-button block icon-left>
-              <ion-icon name="camera"></ion-icon>
-              Cámara
-            </button>
-        </ion-col>
+        <button ion-button block icon-left (click)="abrirCamara()">
+          <ion-icon name="camera"></ion-icon>
+          Cámara
+        </button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

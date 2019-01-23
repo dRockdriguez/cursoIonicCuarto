@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, ToastController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -11,6 +11,10 @@ import { SubirPage } from '../pages/subir/subir';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PipesModule } from '../pipes/pipes.module';
+import { Camera } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { CargaArchivoProvider } from '../providers/carga-archivo/carga-archivo';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDVgd3IqG880Vd6bmfovdEJHXqKgf_HT5c",
@@ -32,7 +36,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +49,11 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     AngularFireDatabase,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    Camera,
+    ImagePicker,
+    CargaArchivoProvider,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ToastController
   ]
 })
 export class AppModule { }
