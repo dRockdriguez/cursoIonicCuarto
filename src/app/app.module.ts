@@ -15,6 +15,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { CargaArchivoProvider } from '../providers/carga-archivo/carga-archivo';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDVgd3IqG880Vd6bmfovdEJHXqKgf_HT5c",
@@ -53,7 +54,8 @@ export const firebaseConfig = {
     ImagePicker,
     CargaArchivoProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ToastController
+    ToastController,
+    SocialSharing
   ]
 })
 export class AppModule { }

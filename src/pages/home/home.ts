@@ -3,6 +3,7 @@ import { ModalController } from 'ionic-angular';
 import { SubirPage } from '../subir/subir';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { CargaArchivoProvider } from '../../providers/carga-archivo/carga-archivo';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +16,8 @@ export class HomePage {
   constructor(
     private modalCtrl: ModalController,
     private afDB: AngularFireDatabase,
-    private cargaArchivo: CargaArchivoProvider
+    private cargaArchivo: CargaArchivoProvider,
+    private socialSharing: SocialSharing
   ) {
    
   }
@@ -33,5 +35,13 @@ export class HomePage {
       );
   }
 
+  compartir(post){
+    this.socialSharing.shareViaTwitter(post.titulo,
+      post.img, post.img).then(() => {
+
+      }).catch(() => {
+
+      });
+  }
 
 }
